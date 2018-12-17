@@ -5,6 +5,7 @@ if [[ -n $MYSTRENGTH_ENV_BUCKET  ]] && [[ -n $DOWNLOAD_SSL_CERTS ]]; then
   echo "Copying SSL Certs $DOWNLOAD_SSL_CERTS from $MYSTRENGTH_ENV..."
   aws s3 cp s3://$MYSTRENGTH_ENV_BUCKET/ssl/$(echo $DOWNLOAD_SSL_CERTS | tr [A-Z] [a-z]).crt /etc/nginx/certs/
   aws s3 cp s3://$MYSTRENGTH_ENV_BUCKET/ssl/$(echo $DOWNLOAD_SSL_CERTS | tr [A-Z] [a-z]).key /etc/nginx/certs/
+  chmod 400 /etc/nginx/certs/$(echo $DOWNLOAD_SSL_CERTS | tr [A-Z] [a-z]).key
 fi
 
 # Warn if the DOCKER_HOST socket does not exist
